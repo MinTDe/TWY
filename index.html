@@ -1,111 +1,49 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-
-
-
-<script language="javascript">
-
-
-
-$(document).ready(function(){
-
-	//초기값
-
-	var hour = 25;
-
-	var minute = 0;
-
-	var second = 0;
-
-
-
-	// 초기화
-
-	$(".countTimeHour").html(hour);
-
-	$(".countTimeMinute").html(minute);
-
-	$(".countTimeSecond").html(second);
-
-
-
-	var timer = setInterval(function () {
-
-			// 설정
-
-			$(".countTimeHour").html(hour);
-
-			$(".countTimeMinute").html(minute);
-
-			$(".countTimeSecond").html(second);
-
-
-
-			if(second == 0 && minute == 0 && hour == 0){
-
-				alert('타이머 종료.');
-
-				clearInterval(timer); /* 타이머 종료 */
-
-			}else{
-
-				second--;
-
-
-
-				// 분처리
-
-				if(second < 0){
-
-					minute--;
-
-					second = 59;
-
-				}
-
-
-
-				//시간처리
-
-				if(minute < 0){
-
-					if(hour > 0){
-
-						hour--;
-
-						minute = 59;
-
-					}
-
-
-
-				}
-
-			}
-
-    	}, 1000); /* millisecond 단위의 인터벌 */
-
-});
-
-
-
-</script>
-
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+</style>
 </head>
-
 <body>
 
-	<div>
+<p id="demo"></p>
 
-		<strong>군대까지</strong>
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Mar 4, 2019 14:00:00").getTime();
 
-		<span class="countTimeHour">60</span>시
+// Update the count down every 1 second
+var x = setInterval(function() {
 
-		<span class="countTimeMinute">60</span>분
+  // Get todays date and time
+  var now = new Date().getTime();
 
-		<span class="countTimeSecond">60</span>초
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
 
-	</div>
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = "군대까지" + days + "일 " + hours + "시간 "
+  + minutes + "분 " + seconds + "초 ";
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
 
 </body>
-
 </html>
